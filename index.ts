@@ -1,27 +1,19 @@
-//? import default => si coloco el nombres express a continuación de import, es como asignarle la importación a esa variable
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+//* import default => si coloco el nombres express a continuación de import, es como asignarle la importación a esa variable
+import dotenv from 'dotenv';
+import app from './src/server';
+import { LogError, LogSuccess } from './src/utils/logger';
 
-//COnfiguration the .env file
+//? Configuration the .env file
 dotenv.config();
 
-//Create the first app of expres type
-const app: Express = express();
-const port: string | number = process.env.PORT || 8080; //damos la opción x sino está disponible el env
+const port = process.env.PORT || 8080;
 
-//Define the first Route of APP
-app.get('/', (req: Request, res: Response) => {
-  //Send Hello WORLD!
-  res.send('Hello WORLD!!! APP Express + TS + Nodemon + Jest + Swagger + Moongose')
-}); //=> localhost:8000/
-
-app.get('/hello', (req: Request, res: Response) => {
-  //Send Hello WORLD!
-  res.send('Hello WORLD!!!')
-}); //=> localhost:8000/hello
-
-
-//Execute APP and Listen Requests to PORT
+//? Execute server
 app.listen(port, () => {
-  console.log(`EXPRESS SERVER: Running at http://localhost:${port}`)
+  LogSuccess(`[SERVER ON]: Running in http://localhost:${port}/api`);
+});
+
+//? Control server
+app.on('error', (error) => {
+  LogError(`[SERVER ERROR]: ${error} `);
 })

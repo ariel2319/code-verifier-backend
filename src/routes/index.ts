@@ -7,7 +7,7 @@
 
 import express, { Request, Response } from "express";
 import helloRouter from "./HelloRouter";
-import { LogInfo } from "@/utils/logger";
+import { LogInfo } from "../utils/logger";
 
 //Server Instance
 let app = express(); // -> nos permite elegir a qué dirección enviar las consultas
@@ -26,8 +26,8 @@ rootRouter.get('/', (req: Request, res: Response) => {
 //Redirections to Routers & Controllers
 //usamos la función USE
 app.use('/', rootRouter); // http://localhost:8080/api/
-app.use('/hello', helloRouter); // http://localhost:8080/api/hello  -> gestionadas por Herllo Router
+app.use('/hello', helloRouter); // http://localhost:8080/api/hello  -> gestionadas por Hello Router
 
-//add more routes NEXT
+//TODO: add more routes NEXT
 
 export default app;
